@@ -36,7 +36,7 @@ const Category = ({ finalCategory, setCatname, selectedCategory }) => {
       <li
         onClick={() => setCatname(v.name)}
         key={i}
-        className={`p-4 cursor-pointer text-lg font-medium mb-3 rounded-lg transition-all transform hover:scale-105 ${colorClass}`}
+        className={`p-3 md:p-4 cursor-pointer text-base md:text-lg font-medium mb-2 md:mb-3 rounded-lg transition-all transform hover:scale-105 ${colorClass}`}
       >
         {v.name.replace(/-/g, " ")}
       </li>
@@ -45,10 +45,12 @@ const Category = ({ finalCategory, setCatname, selectedCategory }) => {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
+      <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
         Product Categories
       </h3>
-      <ul className="space-y-2 max-h-[500px] overflow-y-auto">{cat}</ul>
+      <ul className="space-y-2 max-h-[400px] md:max-h-[500px] overflow-y-auto">
+        {cat}
+      </ul>
     </div>
   );
 };

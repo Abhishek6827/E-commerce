@@ -13,6 +13,21 @@ function App() {
   const [catName, setCatname] = useState("");
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showCategories, setShowCategories] = useState(!isMobile);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      // On larger screens, always show categories
+      if (!mobile) setShowCategories(true);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const getCategory = () => {
     axios
@@ -50,7 +65,6 @@ function App() {
           setLoading(false);
         })
         .catch(() => {
-          // If API fails, use our custom data
           const customData = getCustomCategoryData(catName);
           setFinalProduct(customData);
           setLoading(false);
@@ -59,7 +73,6 @@ function App() {
   }, [catName]);
 
   const getCustomCategoryData = (category) => {
-    // Custom data for categories that might not have data in the API
     const customData = {
       "mobile-phones": [
         {
@@ -68,7 +81,7 @@ function App() {
           price: 899,
           rating: 4.7,
           thumbnail:
-            "https://via.placeholder.com/300/4A90E2/FFFFFF?text=Smartphone",
+            "https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description:
             "Latest flagship smartphone with amazing camera and performance",
         },
@@ -78,7 +91,7 @@ function App() {
           price: 199,
           rating: 4.2,
           thumbnail:
-            "https://via.placeholder.com/300/50C878/FFFFFF?text=Budget+Phone",
+            "https://images.unsplash.com/photo-1580910051074-3eb694886505?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Affordable smartphone with all essential features",
         },
       ],
@@ -89,7 +102,7 @@ function App() {
           price: 1299,
           rating: 4.8,
           thumbnail:
-            "https://via.placeholder.com/300/FF6B6B/FFFFFF?text=Ultrabook",
+            "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Thin and light laptop with powerful performance",
         },
         {
@@ -98,7 +111,7 @@ function App() {
           price: 1599,
           rating: 4.6,
           thumbnail:
-            "https://via.placeholder.com/300/9B59B6/FFFFFF?text=Gaming+Laptop",
+            "https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description:
             "High-performance laptop for gaming and content creation",
         },
@@ -110,7 +123,7 @@ function App() {
           price: 89,
           rating: 4.5,
           thumbnail:
-            "https://via.placeholder.com/300/F39C12/FFFFFF?text=Perfume",
+            "https://images.unsplash.com/photo-1595425970377-2f8ded7c7b19?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Elegant fragrance for special occasions",
         },
       ],
@@ -121,7 +134,7 @@ function App() {
           price: 49,
           rating: 4.3,
           thumbnail:
-            "https://via.placeholder.com/300/FFC0CB/FFFFFF?text=Skincare",
+            "https://images.unsplash.com/photo-1556228720-195a672e8a03?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Revitalizing cream for youthful skin",
         },
       ],
@@ -132,7 +145,7 @@ function App() {
           price: 59,
           rating: 4.4,
           thumbnail:
-            "https://via.placeholder.com/300/27AE60/FFFFFF?text=Groceries",
+            "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Collection of fresh organic products",
         },
       ],
@@ -143,7 +156,7 @@ function App() {
           price: 79,
           rating: 4.6,
           thumbnail:
-            "https://via.placeholder.com/300/E67E22/FFFFFF?text=Home+Decor",
+            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Contemporary art piece for your living space",
         },
       ],
@@ -154,7 +167,7 @@ function App() {
           price: 249,
           rating: 4.7,
           thumbnail:
-            "https://via.placeholder.com/300/95A5A6/FFFFFF?text=Furniture",
+            "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Comfortable chair for long working hours",
         },
       ],
@@ -164,7 +177,8 @@ function App() {
           title: "Summer Floral Dress",
           price: 59,
           rating: 4.5,
-          thumbnail: "https://via.placeholder.com/300/E74C3C/FFFFFF?text=Dress",
+          thumbnail:
+            "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Light and breezy dress for summer days",
         },
       ],
@@ -174,7 +188,8 @@ function App() {
           title: "Classic Formal Shirt",
           price: 45,
           rating: 4.4,
-          thumbnail: "https://via.placeholder.com/300/3498DB/FFFFFF?text=Shirt",
+          thumbnail:
+            "https://images.unsplash.com/photo-1618517048287-2d0e13ab5d38?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "Crisp shirt for professional settings",
         },
       ],
@@ -185,7 +200,7 @@ function App() {
           price: 129,
           rating: 4.6,
           thumbnail:
-            "https://via.placeholder.com/300/2C3E50/FFFFFF?text=Sunglasses",
+            "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
           description: "UV protected sunglasses with stylish design",
         },
       ],
@@ -207,16 +222,25 @@ function App() {
     <div className="App">
       <Navbar cartCount={cartItems.length} />
 
-      {/* Added pt-20 to account for fixed navbar height */}
-      <div className="pt-20 pb-[40px] min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      {/* Mobile category toggle button */}
+      {isMobile && (
+        <button
+          onClick={() => setShowCategories(!showCategories)}
+          className="md:hidden fixed top-16 left-4 z-40 bg-blue-600 text-white p-2 rounded-md shadow-lg"
+        >
+          {showCategories ? "Hide Categories" : "Show Categories"}
+        </button>
+      )}
+
+      <div className="pt-20 pb-10 min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-[1320px] mx-auto px-4">
-          <h1 className="text-center text-4xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 animate-pulse">
+          <h1 className="text-center text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 animate-pulse">
             Our Products
           </h1>
 
           {catName && (
-            <div className="flex justify-between items-center mb-6 animate-fade-in">
-              <h2 className="text-xl font-semibold text-gray-700 capitalize">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 animate-fade-in">
+              <h2 className="text-xl font-semibold text-gray-700 capitalize mb-2 md:mb-0">
                 Category: {catName.replace(/-/g, " ")}
               </h2>
               <button
@@ -228,8 +252,13 @@ function App() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-[25%_auto] gap-8">
-            <div className="bg-white rounded-lg shadow-lg p-6 h-fit animate-slide-in-left">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+            {/* Categories Panel - Hidden on mobile when not active */}
+            <div
+              className={`bg-white rounded-lg shadow-lg p-4 md:p-6 h-fit animate-slide-in-left ${
+                showCategories ? "block" : "hidden md:block"
+              }`}
+            >
               <Category
                 finalCategory={finalCategory}
                 setCatname={setCatname}
@@ -237,13 +266,14 @@ function App() {
               />
             </div>
 
-            <div className="animate-fade-in">
+            {/* Products Grid */}
+            <div className="flex-1 animate-fade-in">
               {loading ? (
                 <LoadingSpinner />
               ) : (
                 <>
                   {finalProduct.length >= 1 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                       {finalProduct.map((product, index) => (
                         <ProductItems
                           key={index}

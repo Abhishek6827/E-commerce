@@ -27,11 +27,11 @@ const ProductItems = ({ pdata, addToCart, index }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-40 sm:h-48 overflow-hidden">
         {!imageLoaded && (
           <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-purple-100 animate-pulse flex items-center justify-center">
             <svg
-              className="w-12 h-12 text-gray-300"
+              className="w-10 h-10 text-gray-300"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -58,21 +58,21 @@ const ProductItems = ({ pdata, addToCart, index }) => {
           {pdata.rating} ★
         </div>
       </div>
-      <div className="p-4">
-        <h4 className="font-semibold text-lg mb-2 text-gray-800 line-clamp-1">
+      <div className="p-3 sm:p-4">
+        <h4 className="font-semibold text-base sm:text-lg mb-2 text-gray-800 line-clamp-1">
           {pdata.title}
         </h4>
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-600 text-xs sm:text-sm mb-3 line-clamp-2">
           {pdata.description}
         </p>
         <div className="flex justify-between items-center mb-3">
-          <b className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 text-xl">
+          <b className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 text-lg sm:text-xl">
             ${pdata.price}
           </b>
           <span className="text-xs text-gray-500">Free Shipping</span>
         </div>
         <button
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-2 px-4 rounded-md transition-all transform hover:scale-105 shadow-md"
+          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-2 px-3 sm:py-2 sm:px-4 rounded-md transition-all transform hover:scale-105 shadow-md text-sm sm:text-base"
           onClick={handleAddToCart}
         >
           Add to Cart
