@@ -19,6 +19,11 @@ const Navbar = ({ cartCount }) => {
     };
   }, []);
 
+  // Close mobile menu when a link is clicked
+  const handleMenuItemClick = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -27,19 +32,11 @@ const Navbar = ({ cartCount }) => {
           : "bg-gradient-to-r from-purple-600 to-blue-600 py-3 md:py-4"
       }`}
     >
-      <div className="w-full px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <span className="text-xl font-bold text-white">ShopNow</span>
           </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden text-white text-2xl"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            ☰
-          </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
@@ -62,8 +59,8 @@ const Navbar = ({ cartCount }) => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center">
-            <div className="relative mr-4">
+          <div className="hidden md:flex items-center space-x-4">
+            <div className="relative">
               <svg
                 className="w-6 h-6 text-white"
                 fill="none"
@@ -79,7 +76,7 @@ const Navbar = ({ cartCount }) => {
                 ></path>
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs animate-ping-once">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   {cartCount}
                 </span>
               )}
@@ -90,9 +87,9 @@ const Navbar = ({ cartCount }) => {
             </button>
           </div>
 
-          {/* Mobile cart icon (visible on mobile) */}
-          <div className="md:hidden flex items-center">
-            <div className="relative mr-4">
+          {/* Mobile menu button and cart */}
+          <div className="md:hidden flex items-center space-x-4">
+            <div className="relative">
               <svg
                 className="w-6 h-6 text-white"
                 fill="none"
@@ -108,39 +105,68 @@ const Navbar = ({ cartCount }) => {
                 ></path>
               </svg>
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs animate-ping-once">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   {cartCount}
                 </span>
               )}
             </div>
+
+            <button
+              className="text-white text-2xl focus:outline-none"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? "✕" : "☰"}
+            </button>
           </div>
         </div>
 
         {/* Mobile menu (shown when menu button is clicked) */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <div className="flex flex-col space-y-3">
-              <button className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left">
-                Home
-              </button>
-              <button className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left">
-                Products
-              </button>
-              <button className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left">
-                Categories
-              </button>
-              <button className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left">
-                About
-              </button>
-              <button className="text-white hover:text-blue-200 px-3 py-2 rounded-md text-sm font-medium transition-colors text-left">
-                Contact
-              </button>
-              <button className="bg-white text-blue-600 hover:bg-blue-100 px-4 py-2 rounded-md text-sm font-medium transition-colors transform hover:scale-105 mt-2">
-                Sign In
-              </button>
-            </div>
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen
+              ? "max-h-96 opacity-100 py-4"
+              : "max-h-0 opacity-0 overflow-hidden"
+          }`}
+        >
+          <div className="flex flex-col space-y-3 px-2 pt-2 pb-3">
+            <button
+              className="text-white hover:bg-blue-500 px-3 py-2 rounded-md text-base font-medium transition-colors text-left"
+              onClick={handleMenuItemClick}
+            >
+              Home
+            </button>
+            <button
+              className="text-white hover:bg-blue-500 px-3 py-2 rounded-md text-base font-medium transition-colors text-left"
+              onClick={handleMenuItemClick}
+            >
+              Products
+            </button>
+            <button
+              className="text-white hover:bg-blue-500 px-3 py-2 rounded-md text-base font-medium transition-colors text-left"
+              onClick={handleMenuItemClick}
+            >
+              Categories
+            </button>
+            <button
+              className="text-white hover:bg-blue-500 px-3 py-2 rounded-md text-base font-medium transition-colors text-left"
+              onClick={handleMenuItemClick}
+            >
+              About
+            </button>
+            <button
+              className="text-white hover:bg-blue-500 px-3 py-2 rounded-md text-base font-medium transition-colors text-left"
+              onClick={handleMenuItemClick}
+            >
+              Contact
+            </button>
+            <button
+              className="bg-white text-blue-600 hover:bg-blue-100 px-4 py-2 rounded-md text-base font-medium transition-colors mt-2"
+              onClick={handleMenuItemClick}
+            >
+              Sign In
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

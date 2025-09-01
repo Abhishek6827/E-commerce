@@ -382,3 +382,22 @@ body {
   transform: translateY(-10px);
   transition: opacity 300ms, transform 300ms;
 }
+
+@keyframes ping-once {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-ping-once {
+  animation: ping-once 0.5s ease-in-out;
+}
